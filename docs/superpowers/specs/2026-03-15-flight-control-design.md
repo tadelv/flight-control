@@ -75,7 +75,7 @@ List of saved flying locations:
 
 **Interactions:**
 - Tap a spot card → dashboard switches to that spot's location and conditions
-- "+ ADD" button → opens the map to drop a pin, or uses current location. Then prompts for name and notes.
+- "+ ADD" button → opens a modal with two options: "Use current location" or "Pick on map". If picking on map, a full-screen map overlay appears with a crosshair — tap to confirm position. Then a form modal collects name and notes.
 - Long-press a card → edit or delete options
 
 ### Tab 3: Settings
@@ -107,6 +107,7 @@ List of saved flying locations:
 - Parameters: bounding box around current location
 - Returns airspace polygons with class, name, altitude limits
 - Requires API key (free tier: registration at openaip.net)
+- API key stored as `VITE_OPENAIP_API_KEY` env var. For GitHub Actions deployment, configured as a repository secret.
 
 ### localStorage Schema
 
@@ -132,10 +133,10 @@ fc-settings: {
 }
 
 fc-weather-cache: {
-  data: WeatherResponse,
-  timestamp: number,
-  lat: number,
-  lng: number
+  [coordKey: string]: {   // key = "lat,lng" rounded to 2 decimals
+    data: WeatherResponse,
+    timestamp: number
+  }
 }
 
 fc-airspace-cache: {
@@ -152,7 +153,7 @@ fc-last-location: {
 
 ### Caching Strategy
 
-- Weather: 10-minute TTL, re-fetched on manual refresh or location change
+- Weather: 10-minute TTL, re-fetched on manual refresh or location change. Cache is keyed by coordinate (rounded to 2 decimal places) so multiple spots don't thrash a single cache entry.
 - Airspace: 24-hour TTL, re-fetched when map bounds change significantly
 - Last location: updated on each successful geolocation
 
@@ -160,15 +161,22 @@ fc-last-location: {
 
 ```
 function computeStatus(weather, settings):
-  checks = [
+  // For normal checks: value > limit means NO-GO
+  // For visibility: value < limit means NO-GO (inverted)
+
+  normalChecks = [
     { value: weather.windSpeed, limit: settings.maxWind, name: "Wind" },
     { value: weather.windGusts, limit: settings.maxGust, name: "Gusts" },
-    { value: settings.minVisibility, limit: weather.visibility, name: "Visibility", inverted: true },
     { value: weather.precipProbability, limit: settings.maxPrecip, name: "Precipitation" }
   ]
 
-  if any check.value > check.limit → NO-GO (return failing checks)
-  if any check.value > check.limit * settings.cautionZone → CAUTION
+  if any normalCheck.value > normalCheck.limit → NO-GO
+  if any normalCheck.value > normalCheck.limit * settings.cautionZone → CAUTION
+
+  // Visibility is inverted: lower is worse
+  if weather.visibility < settings.minVisibility → NO-GO
+  if weather.visibility < settings.minVisibility / settings.cautionZone → CAUTION
+
   if in restricted airspace → NO-GO
   if in advisory airspace → CAUTION
   otherwise → GO

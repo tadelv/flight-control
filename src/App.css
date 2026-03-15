@@ -13,3 +13,99 @@
   --color-hud-muted: #5a7a9a;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 }
+
+/* Scanline overlay for HUD feel */
+#root::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* Smooth tab content transitions */
+.tab-content {
+  animation: fadeIn 200ms ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom range slider styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-hud-cyan);
+  border: 2px solid var(--color-hud-bg);
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
+  margin-top: -6px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-hud-cyan);
+  border: 2px solid var(--color-hud-bg);
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: transparent;
+  border-radius: 2px;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: transparent;
+  border-radius: 2px;
+}
+
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.25), 0 0 6px rgba(0, 229, 255, 0.4);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tab-content { animation: none; }
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* Leaflet popup override for dark theme */
+.leaflet-popup-content-wrapper {
+  background: #111927;
+  color: #c8d6e5;
+  border: 1px solid #1e3a5f;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+.leaflet-popup-tip {
+  background: #111927;
+  border: 1px solid #1e3a5f;
+}
+.leaflet-popup-close-button {
+  color: #5a7a9a !important;
+}
+.leaflet-popup-close-button:hover {
+  color: #00e5ff !important;
+}

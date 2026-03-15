@@ -2,9 +2,9 @@ import type { StatusCheck, FlightStatus, Units } from '../types'
 import { convertSpeed, convertDistance, speedUnit, distanceUnit, formatValue } from '../utils/units'
 
 const statusColor: Record<FlightStatus, string> = {
-  go: 'text-hud-cyan',
-  caution: 'text-hud-amber',
-  'no-go': 'text-hud-red',
+  go: '#00e5ff',
+  caution: '#ffaa00',
+  'no-go': '#ff4444',
 }
 
 interface WeatherStripProps {
@@ -14,8 +14,8 @@ interface WeatherStripProps {
 
 export function WeatherStrip({ checks, units }: WeatherStripProps) {
   return (
-    <div className="grid grid-cols-4 gap-2 px-3 mb-3">
-      {checks.map((check) => {
+    <div className="grid grid-cols-4 gap-1.5 px-3 mb-3">
+      {checks.map((check, i) => {
         const isDistance = check.name === 'Visibility'
         const displayValue = isDistance
           ? convertDistance(check.value, units)
@@ -28,18 +28,26 @@ export function WeatherStrip({ checks, units }: WeatherStripProps) {
             ? '%'
             : speedUnit(units)
 
+        const color = statusColor[check.status]
+
         return (
           <div
             key={check.name}
-            className="bg-hud-panel rounded-md p-2 text-center border border-hud-border"
+            className="bg-hud-panel rounded-md py-2.5 px-1 text-center border border-hud-border"
+            style={{
+              animation: `fadeIn 200ms ease-out ${i * 50}ms both`,
+            }}
           >
-            <div className="text-[9px] tracking-[0.1em] text-hud-muted uppercase">
-              {check.name}
+            <div className="text-[8px] tracking-[0.12em] text-hud-muted uppercase leading-none">
+              {check.name === 'Precipitation' ? 'PRECIP' : check.name.toUpperCase()}
             </div>
-            <div className={`text-lg font-bold ${statusColor[check.status]}`}>
+            <div
+              className="text-xl font-bold leading-tight mt-1"
+              style={{ color, transition: 'color 300ms ease-out' }}
+            >
               {formatValue(displayValue)}
             </div>
-            <div className="text-[9px] text-hud-muted">{displayUnit}</div>
+            <div className="text-[8px] text-hud-muted leading-none mt-0.5">{displayUnit}</div>
           </div>
         )
       })}

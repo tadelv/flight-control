@@ -20,15 +20,17 @@ export default function App() {
 
   return (
     <div className="h-dvh flex flex-col bg-hud-bg">
-      <div className="flex-1 overflow-auto">
-        {activeTab === 'dashboard' && <Dashboard />}
-        {activeTab === 'spots' && (
-          <SpotsList
-            currentLocation={location.coordinates}
-            onNavigateToSpot={handleNavigateToSpot}
-          />
-        )}
-        {activeTab === 'settings' && <Settings />}
+      <div className="flex-1 overflow-auto" role="tabpanel">
+        <div key={activeTab} className="tab-content h-full">
+          {activeTab === 'dashboard' && <Dashboard />}
+          {activeTab === 'spots' && (
+            <SpotsList
+              currentLocation={location.coordinates}
+              onNavigateToSpot={handleNavigateToSpot}
+            />
+          )}
+          {activeTab === 'settings' && <Settings />}
+        </div>
       </div>
       <BottomNav active={activeTab} onChange={setActiveTab} />
     </div>

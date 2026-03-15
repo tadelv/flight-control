@@ -19,18 +19,23 @@ export function ThresholdSlider({ label, description, value, min, max, step, uni
           <div className="text-[11px] text-hud-text tracking-wider">{label}</div>
           <div className="text-[9px] text-hud-muted mt-0.5">{description}</div>
         </div>
-        <div className="flex items-center gap-1.5">
-          <span className="text-lg font-bold text-hud-cyan">{value}</span>
+        <div className="flex items-baseline gap-1">
+          <span className="text-lg font-bold text-hud-cyan tabular-nums">{value}</span>
           <span className="text-[9px] text-hud-muted">{unit}</span>
         </div>
       </div>
-      <div className="relative mt-2">
+      <div className="relative mt-2.5 mb-1">
+        {/* Track background */}
         <div className="h-1 bg-hud-border rounded-full">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-hud-green to-hud-cyan"
-            style={{ width: `${percent}%` }}
+            className="h-full rounded-full transition-[width] duration-100"
+            style={{
+              width: `${percent}%`,
+              background: 'linear-gradient(90deg, #00ff66, #00e5ff)',
+            }}
           />
         </div>
+        {/* Actual range input — now visible with custom CSS styling */}
         <input
           type="range"
           min={min}
@@ -38,7 +43,8 @@ export function ThresholdSlider({ label, description, value, min, max, step, uni
           step={step}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="absolute inset-0 w-full opacity-0 cursor-pointer"
+          className="absolute inset-0 w-full cursor-pointer"
+          aria-label={label}
         />
       </div>
     </div>

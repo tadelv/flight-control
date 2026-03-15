@@ -30,11 +30,14 @@ export function Dashboard() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="bg-hud-panel px-4 py-2.5 flex justify-between items-center border-b border-hud-border">
-        <div className="text-sm font-bold text-hud-cyan tracking-[0.15em]">⬡ FLIGHT CONTROL</div>
+      <div className="bg-hud-panel px-4 py-3 flex justify-between items-center border-b border-hud-border">
+        <div className="text-sm font-bold text-hud-cyan tracking-[0.15em]">
+          <span className="opacity-50 mr-1">⬡</span> FLIGHT CONTROL
+        </div>
         <button
           onClick={weather.refresh}
-          className="text-[11px] text-hud-muted hover:text-hud-cyan transition-colors tracking-wider"
+          className="text-[11px] text-hud-muted hover:text-hud-cyan active:scale-95 transition-all duration-150 tracking-wider px-2 py-1 -mr-2 rounded"
+          aria-label="Refresh weather data"
         >
           ↻ REFRESH
         </button>

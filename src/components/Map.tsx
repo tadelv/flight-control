@@ -23,6 +23,22 @@ function airspaceColor(zone: AirspaceZone): string {
   return '#00ff66'
 }
 
+// Force Leaflet to recalculate size after mount and on resize
+function MapInvalidator() {
+  const map = useMap()
+  useEffect(() => {
+    // Delay to ensure container has resolved its layout
+    const timer = setTimeout(() => map.invalidateSize(), 100)
+    const onResize = () => map.invalidateSize()
+    window.addEventListener('resize', onResize)
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [map])
+  return null
+}
+
 function MapRecenter({ coords }: { coords: Coordinates }) {
   const map = useMap()
   const prevCoords = useRef(coords)
@@ -63,11 +79,11 @@ export function Map({ coordinates, airspaceZones, spots, onMapClick }: MapProps)
       <MapContainer
         center={[coordinates.lat, coordinates.lng]}
         zoom={13}
-        className="h-full w-full"
-        style={{ background: '#1a1a2e' }}
+        style={{ position: 'absolute', inset: 0, background: '#1a1a2e' }}
         zoomControl={false}
         attributionControl={false}
       >
+        <MapInvalidator />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'

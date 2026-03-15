@@ -26,9 +26,7 @@ export default function App() {
     <div
       className="flex flex-col bg-hud-bg"
       style={{
-        transform: `scale(${uiScale})`,
-        transformOrigin: 'top left',
-        width: `${100 / uiScale}%`,
+        zoom: uiScale,
         height: `${100 / uiScale}dvh`,
       }}
     >

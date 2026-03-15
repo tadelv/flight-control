@@ -2,15 +2,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-hud-bg: #0a0e17;
-  --color-hud-panel: #111927;
-  --color-hud-border: #1e3a5f;
-  --color-hud-cyan: #00e5ff;
-  --color-hud-green: #00ff66;
+  --color-hud-bg: #0f1420;
+  --color-hud-panel: #171f2e;
+  --color-hud-border: #2a3f5f;
+  --color-hud-cyan: #00cfee;
+  --color-hud-green: #00dd66;
   --color-hud-amber: #ffaa00;
   --color-hud-red: #ff4444;
-  --color-hud-text: #c8d6e5;
-  --color-hud-muted: #5a7a9a;
+  --color-hud-text: #d4dfe9;
+  --color-hud-muted: #6b8aaa;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
   --breakpoint-xs: 380px;
 }
@@ -61,7 +61,7 @@ input[type="range"]::-webkit-slider-thumb {
   height: 14px;
   border-radius: 50%;
   background: var(--color-hud-cyan);
-  border: 2px solid var(--color-hud-bg);
+  border: 2px solid #0f1420;
   box-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
   margin-top: -6px;
 }
@@ -71,7 +71,7 @@ input[type="range"]::-moz-range-thumb {
   height: 14px;
   border-radius: 50%;
   background: var(--color-hud-cyan);
-  border: 2px solid var(--color-hud-bg);
+  border: 2px solid #0f1420;
   box-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
 }
 
@@ -99,19 +99,19 @@ input[type="range"]:focus-visible::-webkit-slider-thumb {
 
 /* Leaflet popup override for dark theme */
 .leaflet-popup-content-wrapper {
-  background: #111927;
-  color: #c8d6e5;
-  border: 1px solid #1e3a5f;
+  background: #171f2e;
+  color: #d4dfe9;
+  border: 1px solid #2a3f5f;
   border-radius: 6px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 .leaflet-popup-tip {
-  background: #111927;
-  border: 1px solid #1e3a5f;
+  background: #171f2e;
+  border: 1px solid #2a3f5f;
 }
 .leaflet-popup-close-button {
-  color: #5a7a9a !important;
+  color: #6b8aaa !important;
 }
 .leaflet-popup-close-button:hover {
-  color: #00e5ff !important;
+  color: #00cfee !important;
 }

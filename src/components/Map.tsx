@@ -59,17 +59,17 @@ interface MapProps {
 
 export function Map({ coordinates, airspaceZones, spots, onMapClick }: MapProps) {
   return (
-    <div className="relative flex-1 mx-3 mb-3 md:mx-0 md:mb-0 md:rounded-none rounded-lg border border-hud-border md:border-0 overflow-hidden">
+    <div className="relative flex-1 min-h-[300px] mx-3 mb-3 md:mx-0 md:mb-0 md:rounded-none rounded-lg border border-hud-border md:border-0 overflow-hidden">
       <MapContainer
         center={[coordinates.lat, coordinates.lng]}
         zoom={13}
         className="h-full w-full"
-        style={{ background: '#0d1117' }}
+        style={{ background: '#1a1a2e' }}
         zoomControl={false}
         attributionControl={false}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          url="https://{s}.basemaps.cartocdn.com/voyager/{z}/{x}/{y}{r}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         />
 

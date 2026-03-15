@@ -37,10 +37,10 @@ export function GoNoGoHero({ status, reasons, loading }: GoNoGoHeroProps) {
     <div
       className="mx-3 mt-3 rounded-lg p-4 text-center"
       style={{
-        background: loading ? 'linear-gradient(135deg, #111927 0%, #0a0e17 100%)' : config.bg,
+        background: loading ? 'linear-gradient(135deg, #171f2e 0%, #0f1420 100%)' : config.bg,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: loading ? '#1e3a5f' : config.border,
+        borderColor: loading ? '#2a3f5f' : config.border,
         boxShadow: loading ? 'none' : config.shadow,
         transition: 'all 500ms cubic-bezier(0.16, 1, 0.3, 1)',
       }}
@@ -48,7 +48,7 @@ export function GoNoGoHero({ status, reasons, loading }: GoNoGoHeroProps) {
       <div
         className="text-xs tracking-[0.2em] mb-1"
         style={{
-          color: loading ? '#5a7a9a' : config.text,
+          color: loading ? '#6b8aaa' : config.text,
           opacity: 0.5,
           transition: 'color 500ms cubic-bezier(0.16, 1, 0.3, 1)',
         }}
@@ -58,7 +58,7 @@ export function GoNoGoHero({ status, reasons, loading }: GoNoGoHeroProps) {
       <div
         className="text-5xl font-bold tracking-wider"
         style={{
-          color: loading ? '#5a7a9a' : config.text,
+          color: loading ? '#6b8aaa' : config.text,
           transition: 'color 500ms cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
@@ -71,7 +71,7 @@ export function GoNoGoHero({ status, reasons, loading }: GoNoGoHeroProps) {
       <div
         className="text-xs mt-1"
         style={{
-          color: loading ? '#5a7a9a' : config.text,
+          color: loading ? '#6b8aaa' : config.text,
           opacity: 0.5,
           transition: 'color 500ms cubic-bezier(0.16, 1, 0.3, 1)',
         }}

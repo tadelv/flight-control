@@ -47,7 +47,7 @@ export function Dashboard() {
       {/* Banners */}
       {weather.stale && (
         <div className="mx-3 mt-2 px-3 py-1.5 bg-hud-amber/10 border border-hud-amber/25 rounded text-xs text-hud-amber tracking-wider">
-          SHOWING CACHED DATA • {weather.error}
+          WEATHER DATA MAY BE OUTDATED • {weather.error}
         </div>
       )}
       {location.error && !location.coordinates && (

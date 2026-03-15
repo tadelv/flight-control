@@ -39,7 +39,7 @@ export function WeatherStrip({ checks, units }: WeatherStripProps) {
             }}
           >
             <div className="text-[10px] tracking-[0.12em] text-hud-muted uppercase leading-none">
-              {check.name === 'Precipitation' ? 'PRECIP' : check.name.toUpperCase()}
+              {check.name === 'Precipitation' ? 'RAIN' : check.name.toUpperCase()}
             </div>
             <div
               className="text-2xl font-bold leading-tight mt-1"

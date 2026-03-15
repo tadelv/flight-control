@@ -44,10 +44,10 @@ export function Settings() {
         <div className="mb-4">
           <div className="text-[11px] tracking-[0.15em] text-hud-muted mb-2">GO/NO-GO THRESHOLDS</div>
           <div className="md:grid md:grid-cols-2 md:gap-x-3">
-            <ThresholdSlider label="MAX WIND" description="Sustained wind speed limit" value={settings.maxWind} min={5} max={60} step={1} unit={su} onChange={(v) => update('maxWind', v)} />
-            <ThresholdSlider label="MAX GUST" description="Wind gust limit" value={settings.maxGust} min={10} max={80} step={1} unit={su} onChange={(v) => update('maxGust', v)} />
-            <ThresholdSlider label="MIN VISIBILITY" description="Minimum acceptable visibility" value={settings.minVisibility} min={0.5} max={20} step={0.5} unit={du} onChange={(v) => update('minVisibility', v)} />
-            <ThresholdSlider label="MAX PRECIPITATION" description="Rain probability limit" value={settings.maxPrecip} min={0} max={100} step={5} unit="%" onChange={(v) => update('maxPrecip', v)} />
+            <ThresholdSlider label="MAX WIND" description="Steady wind limit" value={settings.maxWind} min={5} max={60} step={1} unit={su} onChange={(v) => update('maxWind', v)} />
+            <ThresholdSlider label="MAX GUST" description="Peak gust limit" value={settings.maxGust} min={10} max={80} step={1} unit={su} onChange={(v) => update('maxGust', v)} />
+            <ThresholdSlider label="MIN VISIBILITY" description="Lowest safe visibility" value={settings.minVisibility} min={0.5} max={20} step={0.5} unit={du} onChange={(v) => update('minVisibility', v)} />
+            <ThresholdSlider label="MAX RAIN" description="Max rain chance" value={settings.maxPrecip} min={0} max={100} step={5} unit="%" onChange={(v) => update('maxPrecip', v)} />
           </div>
         </div>
 
@@ -55,7 +55,7 @@ export function Settings() {
           <div className="text-[11px] tracking-[0.15em] text-hud-muted mb-2">CAUTION ZONE</div>
           <div className="bg-hud-panel rounded-md border border-hud-border p-3">
             <div className="text-xs text-hud-muted/70 leading-relaxed mb-2">
-              CAUTION triggers when any value is within this percentage of your limit.
+              How close to your limits before showing a warning.
             </div>
             <div className="flex gap-2">
               {[0.7, 0.8, 0.9].map((z) => (

@@ -46,28 +46,29 @@ export function SpotEditor({ spot, currentLocation, onSave, onDelete, onCancel }
   return (
     <div className="fixed inset-0 bg-hud-bg/90 z-50 flex items-center justify-center p-4">
       <div className="bg-hud-panel border border-hud-border rounded-lg w-full max-w-sm p-4">
-        <div className="text-[11px] tracking-[0.2em] text-hud-cyan mb-4">
+        <div className="text-xs tracking-[0.2em] text-hud-cyan mb-4">
           {spot ? 'EDIT SPOT' : 'NEW SPOT'}
         </div>
 
         <div className="space-y-3">
           <div>
-            <label className="text-[9px] tracking-[0.15em] text-hud-muted block mb-1">NAME</label>
+            <label className="text-[11px] tracking-[0.12em] text-hud-muted block mb-1">NAME</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="My flying spot"
+              placeholder="e.g. Meadow Park"
               className="w-full bg-hud-bg border border-hud-border rounded px-3 py-2 text-sm text-hud-text font-mono placeholder:text-hud-muted/40 focus:border-hud-cyan focus:outline-none"
+              autoFocus
             />
           </div>
 
           <div>
-            <label className="text-[9px] tracking-[0.15em] text-hud-muted block mb-1">NOTES</label>
+            <label className="text-[11px] tracking-[0.12em] text-hud-muted block mb-1">NOTES</label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Parking nearby, watch for trees..."
+              placeholder="e.g. Parking 50m east, power lines to the north"
               rows={3}
               className="w-full bg-hud-bg border border-hud-border rounded px-3 py-2 text-sm text-hud-text font-mono placeholder:text-hud-muted/40 focus:border-hud-cyan focus:outline-none resize-none"
             />
@@ -75,23 +76,23 @@ export function SpotEditor({ spot, currentLocation, onSave, onDelete, onCancel }
 
           {!spot && (
             <div>
-              <label className="text-[9px] tracking-[0.15em] text-hud-muted block mb-1">LOCATION</label>
+              <label className="text-[11px] tracking-[0.12em] text-hud-muted block mb-1">LOCATION</label>
               <div className="flex gap-2 mb-2">
                 {currentLocation && (
                   <button
                     onClick={() => { setUseCurrentLoc(true); setShowMap(false) }}
-                    className={`flex-1 py-2 text-[10px] tracking-wider rounded border ${
+                    className={`flex-1 py-2 text-xs tracking-wider rounded border ${
                       useCurrentLoc && !showMap
                         ? 'border-hud-cyan bg-hud-cyan/10 text-hud-cyan'
                         : 'border-hud-border text-hud-muted'
                     }`}
                   >
-                    CURRENT LOCATION
+                    USE MY LOCATION
                   </button>
                 )}
                 <button
                   onClick={() => { setUseCurrentLoc(false); setShowMap(true) }}
-                  className={`flex-1 py-2 text-[10px] tracking-wider rounded border ${
+                  className={`flex-1 py-2 text-xs tracking-wider rounded border ${
                     showMap
                       ? 'border-hud-cyan bg-hud-cyan/10 text-hud-cyan'
                       : 'border-hud-border text-hud-muted'
@@ -114,8 +115,8 @@ export function SpotEditor({ spot, currentLocation, onSave, onDelete, onCancel }
                     <Marker position={[lat, lng]} />
                     <MapPickHandler onPick={(coords) => { setLat(coords.lat); setLng(coords.lng) }} />
                   </MapContainer>
-                  <div className="text-[9px] text-hud-muted text-center py-1">
-                    Tap the map to set location • {lat.toFixed(4)}, {lng.toFixed(4)}
+                  <div className="text-[11px] text-hud-muted text-center py-1">
+                    Tap to place marker • {lat.toFixed(4)}, {lng.toFixed(4)}
                   </div>
                 </div>
               )}
@@ -126,14 +127,14 @@ export function SpotEditor({ spot, currentLocation, onSave, onDelete, onCancel }
         <div className="flex gap-2 mt-4">
           <button
             onClick={onCancel}
-            className="flex-1 py-2 text-[10px] tracking-wider text-hud-muted border border-hud-border rounded hover:text-hud-text transition-colors"
+            className="flex-1 py-2.5 text-xs tracking-wider text-hud-muted border border-hud-border rounded hover:text-hud-text transition-colors"
           >
             CANCEL
           </button>
           {spot && onDelete && (
             <button
               onClick={onDelete}
-              className="py-2 px-4 text-[10px] tracking-wider text-hud-red border border-hud-red/25 rounded hover:bg-hud-red/10 transition-colors"
+              className="py-2.5 px-4 text-xs tracking-wider text-hud-red border border-hud-red/25 rounded hover:bg-hud-red/10 transition-colors"
             >
               DELETE
             </button>
@@ -141,9 +142,9 @@ export function SpotEditor({ spot, currentLocation, onSave, onDelete, onCancel }
           <button
             onClick={handleSave}
             disabled={!name.trim()}
-            className="flex-1 py-2 text-[10px] tracking-wider text-hud-cyan border border-hud-cyan rounded hover:bg-hud-cyan/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="flex-1 py-2.5 text-xs tracking-wider text-hud-cyan border border-hud-cyan rounded hover:bg-hud-cyan/10 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            {spot ? 'SAVE' : 'ADD SPOT'}
+            {spot ? 'SAVE CHANGES' : 'ADD SPOT'}
           </button>
         </div>
       </div>

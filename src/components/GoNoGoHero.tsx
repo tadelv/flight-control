@@ -77,10 +77,10 @@ export function GoNoGoHero({ status, reasons, loading }: GoNoGoHeroProps) {
         }}
       >
         {loading
-          ? 'Acquiring signal...'
+          ? 'Checking conditions...'
           : reasons.length > 0
             ? reasons.join(' \u2022 ')
-            : 'All conditions within limits'}
+            : 'All clear for flight'}
       </div>
     </div>
   )

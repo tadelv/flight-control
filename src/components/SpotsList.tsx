@@ -62,8 +62,8 @@ export function SpotsList({ currentLocation, onNavigateToSpot }: SpotsListProps)
             <div>
               <div className="text-hud-muted/50 text-2xl mb-2">★</div>
               <div className="text-xs text-hud-muted/50 tracking-wider leading-relaxed">
-                No saved spots yet.<br />
-                Tap + ADD to save your first flying location.
+                No spots saved yet.<br />
+                Add your favorite flying locations to check conditions quickly.
               </div>
             </div>
           </div>

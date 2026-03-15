@@ -14,7 +14,7 @@ interface WeatherStripProps {
 
 export function WeatherStrip({ checks, units }: WeatherStripProps) {
   return (
-    <div className="grid grid-cols-4 gap-1.5 px-3 mb-3">
+    <div className="grid grid-cols-2 xs:grid-cols-4 gap-1.5 px-3 mb-3">
       {checks.map((check, i) => {
         const isDistance = check.name === 'Visibility'
         const displayValue = isDistance

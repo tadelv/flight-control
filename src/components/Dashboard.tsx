@@ -30,6 +30,7 @@ export function Dashboard() {
 
   return (
     <div className="flex flex-col h-full">
+      {/* Header */}
       <div className="bg-hud-panel px-4 py-3 flex justify-between items-center border-b border-hud-border">
         <div className="text-sm font-bold text-hud-cyan tracking-[0.15em]">
           <span className="opacity-50 mr-1">⬡</span> FLIGHT CONTROL
@@ -43,38 +44,47 @@ export function Dashboard() {
         </button>
       </div>
 
+      {/* Banners */}
       {weather.stale && (
         <div className="mx-3 mt-2 px-3 py-1.5 bg-hud-amber/10 border border-hud-amber/25 rounded text-xs text-hud-amber tracking-wider">
           SHOWING CACHED DATA • {weather.error}
         </div>
       )}
-
       {location.error && !location.coordinates && (
         <div className="mx-3 mt-2 px-3 py-1.5 bg-hud-red/10 border border-hud-red/25 rounded text-xs text-hud-red tracking-wider">
           {location.error}
         </div>
       )}
 
-      <GoNoGoHero
-        status={result.status}
-        reasons={result.reasons}
-        loading={loading}
-      />
+      {/* Desktop: side-by-side / Mobile: stacked */}
+      <div className="flex-1 flex flex-col md:flex-row md:min-h-0">
+        {/* Left panel: status + weather */}
+        <div className="md:w-80 lg:w-96 md:flex-shrink-0 md:overflow-auto md:border-r md:border-hud-border">
+          <GoNoGoHero
+            status={result.status}
+            reasons={result.reasons}
+            loading={loading}
+          />
 
-      {weather.data && (
-        <div className="mt-3">
-          <WeatherStrip checks={result.checks} units={settings.units} />
+          {weather.data && (
+            <div className="mt-3">
+              <WeatherStrip checks={result.checks} units={settings.units} />
+            </div>
+          )}
         </div>
-      )}
 
-      {location.coordinates && (
-        <Map
-          coordinates={location.coordinates}
-          airspaceZones={airspace.zones}
-          spots={spots}
-          onMapClick={location.setManualLocation}
-        />
-      )}
+        {/* Right panel: map (expands on desktop) */}
+        {location.coordinates && (
+          <div className="flex-1 flex flex-col min-h-[250px] md:min-h-0">
+            <Map
+              coordinates={location.coordinates}
+              airspaceZones={airspace.zones}
+              spots={spots}
+              onMapClick={location.setManualLocation}
+            />
+          </div>
+        )}
+      </div>
     </div>
   )
 }

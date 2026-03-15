@@ -59,7 +59,7 @@ interface MapProps {
 
 export function Map({ coordinates, airspaceZones, spots, onMapClick }: MapProps) {
   return (
-    <div className="relative flex-1 mx-3 mb-3 rounded-lg border border-hud-border overflow-hidden">
+    <div className="relative flex-1 mx-3 mb-3 md:mx-0 md:mb-0 md:rounded-none rounded-lg border border-hud-border md:border-0 overflow-hidden">
       <MapContainer
         center={[coordinates.lat, coordinates.lng]}
         zoom={13}

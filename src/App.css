@@ -12,6 +12,7 @@
   --color-hud-text: #c8d6e5;
   --color-hud-muted: #5a7a9a;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --breakpoint-xs: 380px;
 }
 
 

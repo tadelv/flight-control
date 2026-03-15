@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BottomNav } from './components/BottomNav'
 import './App.css'
 
 type Tab = 'dashboard' | 'spots' | 'settings'
@@ -13,19 +14,7 @@ export default function App() {
         {activeTab === 'spots' && <div className="p-4 text-hud-cyan">Spots</div>}
         {activeTab === 'settings' && <div className="p-4 text-hud-cyan">Settings</div>}
       </div>
-      <nav className="bg-hud-panel border-t border-hud-border grid grid-cols-3">
-        {(['dashboard', 'spots', 'settings'] as Tab[]).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`py-3 text-center text-[10px] tracking-widest uppercase ${
-              activeTab === tab ? 'text-hud-cyan' : 'text-hud-muted'
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </nav>
+      <BottomNav active={activeTab} onChange={setActiveTab} />
     </div>
   )
 }

@@ -59,8 +59,7 @@ async function fetchAirspace(lat: number, lng: number): Promise<{ zones: Airspac
   }
 
   const params = new URLSearchParams({
-    pos: `${lng},${lat}`,
-    dist: '25000',
+    bbox: `${bounds.west},${bounds.south},${bounds.east},${bounds.north}`,
     limit: '100',
   })
 
@@ -71,21 +70,40 @@ async function fetchAirspace(lat: number, lng: number): Promise<{ zones: Airspac
   if (!res.ok) throw new Error(`Airspace API error: ${res.status}`)
   const json = await res.json()
 
-  const zones: AirspaceZone[] = (json.items ?? []).map((item: Record<string, unknown>) => ({
-    id: item._id as string,
-    name: item.name as string,
-    type: item.type as string,
-    class: (item.icaoClass as string) ?? 'UNKNOWN',
-    lowerLimit: ((item.lowerLimit as Record<string, number>)?.value ?? 0),
-    upperLimit: ((item.upperLimit as Record<string, number>)?.value ?? 0),
-    geometry: (item.geometry as Record<string, unknown>)?.coordinates as [number, number][][],
-  }))
+  // OpenAIP type codes: 0=OTHER, 1=RESTRICTED, 2=DANGER, 3=PROHIBITED, 4=CTR, 5=TMZ, 6=RMZ, 7=TMA, ...
+  const TYPE_MAP: Record<number, string> = {
+    0: 'OTHER', 1: 'RESTRICTED', 2: 'DANGER', 3: 'PROHIBITED',
+    4: 'CTR', 5: 'TMZ', 6: 'RMZ', 7: 'TMA', 8: 'TRA', 9: 'TSA',
+    10: 'FIR', 11: 'UIR', 12: 'ADIZ', 13: 'ATZ', 14: 'MATZ',
+    15: 'AIRWAY', 16: 'MTR', 17: 'ALERT', 18: 'WARNING', 19: 'PROTECTED',
+    20: 'HTZ', 21: 'GLIDING', 22: 'TRP', 23: 'TIZ', 24: 'TIA', 25: 'MTA',
+    26: 'CTA', 27: 'ACC', 28: 'SPORT', 29: 'LOW_OVERFLIGHT',
+  }
+
+  const CLASS_MAP: Record<number, string> = {
+    0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G',
+    7: 'SUA', 8: 'UNCLASSIFIED',
+  }
+
+  const zones: AirspaceZone[] = (json.items ?? []).map((item: Record<string, unknown>) => {
+    const geom = item.geometry as Record<string, unknown> | undefined
+    const coords = geom?.coordinates as [number, number][][] | undefined
+    return {
+      id: item._id as string,
+      name: item.name as string,
+      type: TYPE_MAP[item.type as number] ?? 'OTHER',
+      class: CLASS_MAP[item.icaoClass as number] ?? 'UNCLASSIFIED',
+      lowerLimit: ((item.lowerLimit as Record<string, number>)?.value ?? 0),
+      upperLimit: ((item.upperLimit as Record<string, number>)?.value ?? 0),
+      geometry: coords ?? [],
+    }
+  })
 
   return { zones, bounds }
 }
 
 const RESTRICTED_TYPES = ['RESTRICTED', 'DANGER', 'PROHIBITED']
-const CAUTION_TYPES = ['CTR', 'TMA']
+const CAUTION_TYPES = ['CTR', 'TMA', 'TMZ', 'ATZ', 'MATZ']
 
 interface AirspaceState {
   zones: AirspaceZone[]

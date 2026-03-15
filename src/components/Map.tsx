@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
 })
 
 const RESTRICTED_TYPES = ['RESTRICTED', 'DANGER', 'PROHIBITED']
-const CAUTION_TYPES = ['CTR', 'TMA']
+const CAUTION_TYPES = ['CTR', 'TMA', 'TMZ', 'ATZ', 'MATZ']
 
 function airspaceColor(zone: AirspaceZone): string {
   if (RESTRICTED_TYPES.includes(zone.type)) return '#ff4444'

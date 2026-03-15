@@ -52,6 +52,20 @@ export function Settings() {
         </div>
 
         <div className="mb-4">
+          <div className="text-[11px] tracking-[0.15em] text-hud-muted mb-2">UI SCALE</div>
+          <ThresholdSlider
+            label="DISPLAY SIZE"
+            description="Scale all interface elements"
+            value={Math.round((settings.uiScale ?? 1) * 100)}
+            min={80}
+            max={200}
+            step={10}
+            unit="%"
+            onChange={(v) => update('uiScale', v / 100)}
+          />
+        </div>
+
+        <div className="mb-4">
           <div className="text-[11px] tracking-[0.15em] text-hud-muted mb-2">CAUTION ZONE</div>
           <div className="bg-hud-panel rounded-md border border-hud-border p-3">
             <div className="text-xs text-hud-muted/70 leading-relaxed mb-2">

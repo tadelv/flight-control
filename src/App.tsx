@@ -33,7 +33,7 @@ export default function App() {
         </div>
       </div>
       <BottomNav active={activeTab} onChange={setActiveTab} />
-      <div className="scanline-overlay" aria-hidden="true" />
+
     </div>
   )
 }

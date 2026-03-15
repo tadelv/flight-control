@@ -1,5 +1,6 @@
 import { GoNoGoHero } from './GoNoGoHero'
 import { WeatherStrip } from './WeatherStrip'
+import { AirspaceInfo } from './AirspaceInfo'
 import { Map } from './Map'
 import { computeStatus } from '../utils/goNoGo'
 import { useWeather } from '../hooks/useWeather'
@@ -71,6 +72,8 @@ export function Dashboard() {
               <WeatherStrip checks={result.checks} units={settings.units} />
             </div>
           )}
+
+          <AirspaceInfo zones={airspace.zones} />
         </div>
 
         {/* Right panel: map (expands on desktop) */}

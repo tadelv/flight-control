@@ -107,16 +107,9 @@ export function Map({ coordinates, airspaceZones, spots, onMapClick }: MapProps)
                 fillColor: airspaceColor(zone),
                 fillOpacity: 0.15,
                 weight: 1,
+                interactive: false,
               }}
-            >
-              <Popup>
-                <div className="font-mono text-xs">
-                  <div className="font-bold">{zone.name}</div>
-                  <div>Class: {zone.class} | Type: {zone.type}</div>
-                  <div>{zone.lowerLimit}m - {zone.upperLimit}m</div>
-                </div>
-              </Popup>
-            </Polygon>
+            />
           ) : null,
         )}
 

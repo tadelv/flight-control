@@ -36,7 +36,7 @@ export function Dashboard() {
         </div>
         <button
           onClick={weather.refresh}
-          className="text-[11px] text-hud-muted hover:text-hud-cyan active:scale-95 transition-all duration-150 tracking-wider px-2 py-1 -mr-2 rounded"
+          className="text-xs text-hud-muted hover:text-hud-cyan active:scale-95 transition-all duration-150 tracking-wider px-2 py-1 -mr-2 rounded"
           aria-label="Refresh weather data"
         >
           ↻ REFRESH
@@ -44,13 +44,13 @@ export function Dashboard() {
       </div>
 
       {weather.stale && (
-        <div className="mx-3 mt-2 px-3 py-1.5 bg-hud-amber/10 border border-hud-amber/25 rounded text-[10px] text-hud-amber tracking-wider">
+        <div className="mx-3 mt-2 px-3 py-1.5 bg-hud-amber/10 border border-hud-amber/25 rounded text-xs text-hud-amber tracking-wider">
           SHOWING CACHED DATA • {weather.error}
         </div>
       )}
 
       {location.error && !location.coordinates && (
-        <div className="mx-3 mt-2 px-3 py-1.5 bg-hud-red/10 border border-hud-red/25 rounded text-[10px] text-hud-red tracking-wider">
+        <div className="mx-3 mt-2 px-3 py-1.5 bg-hud-red/10 border border-hud-red/25 rounded text-xs text-hud-red tracking-wider">
           {location.error}
         </div>
       )}

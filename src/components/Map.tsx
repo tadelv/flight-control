@@ -119,13 +119,13 @@ export function Map({ coordinates, airspaceZones, spots, onMapClick }: MapProps)
       </MapContainer>
 
       <div className="absolute top-2 right-2 z-[1000] flex gap-2 bg-hud-bg/80 rounded px-2 py-1">
-        <span className="text-[9px] text-hud-red flex items-center gap-1">
+        <span className="text-[11px] text-hud-red flex items-center gap-1">
           <span className="w-2 h-2 rounded-sm bg-hud-red/25 border border-hud-red inline-block" /> No-fly
         </span>
-        <span className="text-[9px] text-hud-amber flex items-center gap-1">
+        <span className="text-[11px] text-hud-amber flex items-center gap-1">
           <span className="w-2 h-2 rounded-sm bg-hud-amber/25 border border-hud-amber inline-block" /> Caution
         </span>
-        <span className="text-[9px] text-hud-green flex items-center gap-1">
+        <span className="text-[11px] text-hud-green flex items-center gap-1">
           <span className="w-2 h-2 rounded-sm bg-hud-green/25 border border-hud-green inline-block" /> Clear
         </span>
       </div>

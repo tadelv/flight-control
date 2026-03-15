@@ -16,12 +16,12 @@ export function ThresholdSlider({ label, description, value, min, max, step, uni
     <div className="bg-hud-panel rounded-md border border-hud-border p-3 mb-2">
       <div className="flex justify-between items-center mb-1">
         <div>
-          <div className="text-[11px] text-hud-text tracking-wider">{label}</div>
-          <div className="text-[9px] text-hud-muted mt-0.5">{description}</div>
+          <div className="text-xs text-hud-text tracking-wider">{label}</div>
+          <div className="text-[11px] text-hud-muted mt-0.5">{description}</div>
         </div>
         <div className="flex items-baseline gap-1">
           <span className="text-lg font-bold text-hud-cyan tabular-nums">{value}</span>
-          <span className="text-[9px] text-hud-muted">{unit}</span>
+          <span className="text-[11px] text-hud-muted">{unit}</span>
         </div>
       </div>
       <div className="relative mt-2.5 mb-1">

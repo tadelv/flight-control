@@ -38,16 +38,16 @@ export function WeatherStrip({ checks, units }: WeatherStripProps) {
               animation: `fadeIn 200ms ease-out ${i * 50}ms both`,
             }}
           >
-            <div className="text-[8px] tracking-[0.12em] text-hud-muted uppercase leading-none">
+            <div className="text-[10px] tracking-[0.12em] text-hud-muted uppercase leading-none">
               {check.name === 'Precipitation' ? 'PRECIP' : check.name.toUpperCase()}
             </div>
             <div
-              className="text-xl font-bold leading-tight mt-1"
+              className="text-2xl font-bold leading-tight mt-1"
               style={{ color, transition: 'color 300ms ease-out' }}
             >
               {formatValue(displayValue)}
             </div>
-            <div className="text-[8px] text-hud-muted leading-none mt-0.5">{displayUnit}</div>
+            <div className="text-[10px] text-hud-muted leading-none mt-0.5">{displayUnit}</div>
           </div>
         )
       })}

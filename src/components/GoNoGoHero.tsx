@@ -46,7 +46,7 @@ export function GoNoGoHero({ status, reasons, loading }: GoNoGoHeroProps) {
       }}
     >
       <div
-        className="text-[11px] tracking-[0.2em] mb-1"
+        className="text-xs tracking-[0.2em] mb-1"
         style={{
           color: loading ? '#5a7a9a' : config.text,
           opacity: 0.5,
@@ -56,7 +56,7 @@ export function GoNoGoHero({ status, reasons, loading }: GoNoGoHeroProps) {
         STATUS
       </div>
       <div
-        className="text-4xl font-bold tracking-wider"
+        className="text-5xl font-bold tracking-wider"
         style={{
           color: loading ? '#5a7a9a' : config.text,
           transition: 'color 500ms cubic-bezier(0.16, 1, 0.3, 1)',
@@ -69,7 +69,7 @@ export function GoNoGoHero({ status, reasons, loading }: GoNoGoHeroProps) {
         )}
       </div>
       <div
-        className="text-[11px] mt-1"
+        className="text-xs mt-1"
         style={{
           color: loading ? '#5a7a9a' : config.text,
           opacity: 0.5,

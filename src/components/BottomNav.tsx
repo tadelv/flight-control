@@ -36,7 +36,7 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
               }}
             />
             <div className="text-base mb-0.5">{tab.icon}</div>
-            <div className="text-[10px] tracking-[0.15em]">{tab.label}</div>
+            <div className="text-[11px] tracking-[0.12em]">{tab.label}</div>
           </button>
         )
       })}

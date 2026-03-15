@@ -47,10 +47,10 @@ export function SpotsList({ currentLocation, onNavigateToSpot }: SpotsListProps)
   return (
     <div className="flex flex-col h-full">
       <div className="bg-hud-panel px-4 py-2.5 flex justify-between items-center border-b border-hud-border">
-        <div className="text-[13px] tracking-[0.15em] text-hud-cyan">SAVED SPOTS</div>
+        <div className="text-sm tracking-[0.15em] text-hud-cyan">SAVED SPOTS</div>
         <button
           onClick={() => { setEditing(null); setShowEditor(true) }}
-          className="text-[11px] text-hud-cyan border border-hud-cyan/30 px-2.5 py-1 rounded tracking-wider hover:bg-hud-cyan/10 transition-colors"
+          className="text-xs text-hud-cyan border border-hud-cyan/30 px-2.5 py-1 rounded tracking-wider hover:bg-hud-cyan/10 transition-colors"
         >
           + ADD
         </button>
@@ -61,7 +61,7 @@ export function SpotsList({ currentLocation, onNavigateToSpot }: SpotsListProps)
           <div className="flex items-center justify-center h-full text-center px-8">
             <div>
               <div className="text-hud-muted/50 text-2xl mb-2">★</div>
-              <div className="text-[11px] text-hud-muted/50 tracking-wider leading-relaxed">
+              <div className="text-xs text-hud-muted/50 tracking-wider leading-relaxed">
                 No saved spots yet.<br />
                 Tap + ADD to save your first flying location.
               </div>

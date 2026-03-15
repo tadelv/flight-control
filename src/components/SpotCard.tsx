@@ -47,22 +47,22 @@ export function SpotCard({ spot, status, windSpeed, windGusts, visibility, units
       onPointerCancel={() => longPressTimer.current && clearTimeout(longPressTimer.current)}
     >
       <div className="flex justify-between items-center mb-1.5">
-        <div className="text-[13px] text-hud-text font-bold tracking-wider">{spot.name}</div>
+        <div className="text-sm text-hud-text font-bold tracking-wider">{spot.name}</div>
         <div
-          className="text-[11px] font-bold tracking-wider"
+          className="text-xs font-bold tracking-wider"
           style={{ color: label.color }}
         >
           {label.text}
         </div>
       </div>
-      <div className="text-[10px] text-hud-muted tracking-wide mb-1.5">
+      <div className="text-xs text-hud-muted tracking-wide mb-1.5">
         {spot.lat.toFixed(4)}° N, {spot.lng.toFixed(4)}° E
       </div>
       {spot.notes && (
-        <div className="text-[10px] text-hud-muted/70 leading-relaxed mb-2">{spot.notes}</div>
+        <div className="text-xs text-hud-muted/70 leading-relaxed mb-2">{spot.notes}</div>
       )}
       {windSpeed !== undefined && (
-        <div className="flex gap-3 text-[9px] text-hud-muted tracking-wider pt-1.5 border-t border-hud-border/50">
+        <div className="flex gap-3 text-[11px] text-hud-muted tracking-wider pt-1.5 border-t border-hud-border/50">
           <span>WIND {formatValue(convertSpeed(windSpeed, units))} {speedUnit(units)}</span>
           {windGusts !== undefined && (
             <span>GUST {formatValue(convertSpeed(windGusts, units))} {speedUnit(units)}</span>

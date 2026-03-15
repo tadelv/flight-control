@@ -15,19 +15,23 @@
 }
 
 /* Scanline overlay for HUD feel */
-#root::after {
-  content: '';
+.scanline-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 9999;
-  background: repeating-linear-gradient(
+  background-image: repeating-linear-gradient(
     0deg,
-    transparent,
+    transparent 0px,
     transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
   );
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /* Smooth tab content transitions */

@@ -1,19 +1,34 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { BottomNav } from './components/BottomNav'
 import { Dashboard } from './components/Dashboard'
+import { SpotsList } from './components/SpotsList'
+import { Settings } from './components/Settings'
+import { useLocation } from './hooks/useLocation'
+import type { Coordinates } from './types'
 import './App.css'
 
 type Tab = 'dashboard' | 'spots' | 'settings'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard')
+  const location = useLocation()
+
+  const handleNavigateToSpot = useCallback((coords: Coordinates) => {
+    location.setManualLocation(coords)
+    setActiveTab('dashboard')
+  }, [location])
 
   return (
     <div className="h-dvh flex flex-col bg-hud-bg">
       <div className="flex-1 overflow-auto">
         {activeTab === 'dashboard' && <Dashboard />}
-        {activeTab === 'spots' && <div className="p-4 text-hud-cyan">Spots</div>}
-        {activeTab === 'settings' && <div className="p-4 text-hud-cyan">Settings</div>}
+        {activeTab === 'spots' && (
+          <SpotsList
+            currentLocation={location.coordinates}
+            onNavigateToSpot={handleNavigateToSpot}
+          />
+        )}
+        {activeTab === 'settings' && <Settings />}
       </div>
       <BottomNav active={activeTab} onChange={setActiveTab} />
     </div>

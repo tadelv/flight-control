@@ -73,7 +73,9 @@ export function Dashboard() {
             </div>
           )}
 
-          <AirspaceInfo zones={airspace.zones} />
+          <div className="hidden md:block">
+            <AirspaceInfo zones={airspace.zones} />
+          </div>
         </div>
 
         {/* Right panel: map (expands on desktop) */}
@@ -87,6 +89,11 @@ export function Dashboard() {
             />
           </div>
         )}
+
+        {/* Mobile only: airspace info below map */}
+        <div className="md:hidden">
+          <AirspaceInfo zones={airspace.zones} />
+        </div>
       </div>
     </div>
   )

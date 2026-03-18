@@ -74,7 +74,7 @@ export function Dashboard() {
             </div>
           )}
 
-          {weather.data?.daily?.length > 0 && (
+          {weather.data && weather.data.daily && weather.data.daily.length > 0 && (
             <ForecastStrip daily={weather.data.daily} settings={settings} />
           )}
 

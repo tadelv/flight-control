@@ -11,6 +11,7 @@ const calm: WeatherData = {
   temperature: 20,
   weatherCode: 0,
   hourly: [],
+  daily: [],
 }
 
 describe('computeStatus', () => {

@@ -16,7 +16,7 @@ function getCached(lat: number, lng: number): WeatherData | null {
     const entry = cache[coordKey(lat, lng)]
     if (!entry) return null
     if (Date.now() - entry.timestamp > CACHE_TTL) return null
-    return entry.data
+    return { ...entry.data, daily: entry.data.daily ?? [] }
   } catch {
     return null
   }

@@ -1,6 +1,7 @@
 import { GoNoGoHero } from './GoNoGoHero'
 import { WeatherStrip } from './WeatherStrip'
 import { AirspaceInfo } from './AirspaceInfo'
+import { ForecastStrip } from './ForecastStrip'
 import { Map } from './Map'
 import { computeStatus } from '../utils/goNoGo'
 import { useWeather } from '../hooks/useWeather'
@@ -71,6 +72,10 @@ export function Dashboard() {
             <div className="mt-3">
               <WeatherStrip checks={result.checks} units={settings.units} />
             </div>
+          )}
+
+          {weather.data && weather.data.daily.length > 0 && (
+            <ForecastStrip daily={weather.data.daily} settings={settings} />
           )}
 
           <div className="hidden md:block">

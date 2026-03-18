@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import type { Coordinates, WeatherData, HourlyForecast } from '../types'
+import type { Coordinates, WeatherData, HourlyForecast, DailyForecast } from '../types'
 
 const CACHE_TTL = 10 * 60 * 1000 // 10 minutes
 const CACHE_KEY = 'fc-weather-cache'
@@ -40,6 +40,8 @@ async function fetchWeather(lat: number, lng: number): Promise<WeatherData> {
     current: 'wind_speed_10m,wind_gusts_10m,visibility,precipitation_probability,temperature_2m,weather_code',
     hourly: 'wind_speed_10m,wind_gusts_10m,precipitation_probability',
     forecast_hours: '12',
+    daily: 'wind_speed_10m_max,wind_gusts_10m_max,visibility_min,precipitation_probability_max',
+    forecast_days: '3',
     wind_speed_unit: 'kmh',
   })
 
@@ -54,6 +56,14 @@ async function fetchWeather(lat: number, lng: number): Promise<WeatherData> {
     precipProbability: json.hourly.precipitation_probability[i],
   }))
 
+  const daily: DailyForecast[] = (json.daily?.time ?? []).map((date: string, i: number) => ({
+    date,
+    maxWindSpeed: json.daily.wind_speed_10m_max[i],
+    maxWindGusts: json.daily.wind_gusts_10m_max[i],
+    minVisibility: (json.daily.visibility_min[i] ?? 100000) / 1000,
+    maxPrecipProbability: json.daily.precipitation_probability_max[i],
+  }))
+
   return {
     windSpeed: json.current.wind_speed_10m,
     windGusts: json.current.wind_gusts_10m,
@@ -62,6 +72,7 @@ async function fetchWeather(lat: number, lng: number): Promise<WeatherData> {
     temperature: json.current.temperature_2m,
     weatherCode: json.current.weather_code,
     hourly,
+    daily,
   }
 }
 

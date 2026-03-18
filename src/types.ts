@@ -39,6 +39,7 @@ export interface WeatherData {
   temperature: number     // Celsius
   weatherCode: number
   hourly: HourlyForecast[]
+  daily: DailyForecast[]
 }
 
 export interface HourlyForecast {
@@ -46,6 +47,14 @@ export interface HourlyForecast {
   windSpeed: number
   windGusts: number
   precipProbability: number
+}
+
+export interface DailyForecast {
+  date: string              // ISO date string (YYYY-MM-DD)
+  maxWindSpeed: number      // km/h
+  maxWindGusts: number      // km/h
+  minVisibility: number     // km
+  maxPrecipProbability: number // 0-100
 }
 
 export interface StatusCheck {

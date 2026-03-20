@@ -1,6 +1,6 @@
 import { ThresholdSlider } from './ThresholdSlider'
 import { useStorage } from '../hooks/useStorage'
-import type { Settings as SettingsType, Units } from '../types'
+import type { Settings as SettingsType, Units, WindSpeedUnit } from '../types'
 import { DEFAULT_SETTINGS } from '../types'
 import { speedUnit, distanceUnit } from '../utils/units'
 
@@ -11,7 +11,8 @@ export function Settings() {
     setSettings((prev) => ({ ...prev, [key]: value }))
   }
 
-  const su = speedUnit(settings.units)
+  const wsu = settings.windSpeedUnit ?? 'km/h'
+  const su = speedUnit(wsu)
   const du = distanceUnit(settings.units)
 
   return (
@@ -31,6 +32,25 @@ export function Settings() {
                 onClick={() => update('units', u)}
                 className={`flex-1 py-2 text-xs tracking-wider rounded border transition-colors ${
                   settings.units === u
+                    ? 'border-hud-cyan bg-hud-cyan/10 text-hud-cyan'
+                    : 'border-hud-border text-hud-muted'
+                }`}
+              >
+                {u.toUpperCase()}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <div className="text-[11px] tracking-[0.15em] text-hud-muted mb-2">WIND SPEED UNIT</div>
+          <div className="flex gap-2">
+            {(['km/h', 'm/s', 'kts'] as WindSpeedUnit[]).map((u) => (
+              <button
+                key={u}
+                onClick={() => update('windSpeedUnit', u)}
+                className={`flex-1 py-2 text-xs tracking-wider rounded border transition-colors ${
+                  wsu === u
                     ? 'border-hud-cyan bg-hud-cyan/10 text-hud-cyan'
                     : 'border-hud-border text-hud-muted'
                 }`}

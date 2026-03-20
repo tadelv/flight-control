@@ -2,11 +2,14 @@ import { describe, it, expect } from 'vitest'
 import { convertSpeed, convertDistance, formatValue } from '../units'
 
 describe('convertSpeed', () => {
-  it('returns km/h unchanged for metric', () => {
-    expect(convertSpeed(25, 'metric')).toBeCloseTo(25)
+  it('returns km/h unchanged for km/h', () => {
+    expect(convertSpeed(25, 'km/h')).toBeCloseTo(25)
   })
-  it('converts km/h to mph for imperial', () => {
-    expect(convertSpeed(100, 'imperial')).toBeCloseTo(62.14, 1)
+  it('converts km/h to m/s', () => {
+    expect(convertSpeed(36, 'm/s')).toBeCloseTo(10)
+  })
+  it('converts km/h to knots', () => {
+    expect(convertSpeed(100, 'kts')).toBeCloseTo(53.9957, 1)
   })
 })
 

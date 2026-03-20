@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import type { Spot, FlightStatus, Units } from '../types'
+import type { Spot, FlightStatus, Units, WindSpeedUnit } from '../types'
 import { convertSpeed, convertDistance, speedUnit, distanceUnit, formatValue } from '../utils/units'
 
 const statusLabel: Record<FlightStatus, { text: string; color: string }> = {
@@ -15,11 +15,12 @@ interface SpotCardProps {
   windGusts?: number
   visibility?: number
   units: Units
+  windSpeedUnit: WindSpeedUnit
   onTap: () => void
   onLongPress: () => void
 }
 
-export function SpotCard({ spot, status, windSpeed, windGusts, visibility, units, onTap, onLongPress }: SpotCardProps) {
+export function SpotCard({ spot, status, windSpeed, windGusts, visibility, units, windSpeedUnit, onTap, onLongPress }: SpotCardProps) {
   const label = statusLabel[status]
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -63,9 +64,9 @@ export function SpotCard({ spot, status, windSpeed, windGusts, visibility, units
       )}
       {windSpeed !== undefined && (
         <div className="flex gap-3 text-[11px] text-hud-muted tracking-wider pt-1.5 border-t border-hud-border/50">
-          <span>WIND {formatValue(convertSpeed(windSpeed, units))} {speedUnit(units)}</span>
+          <span>WIND {formatValue(convertSpeed(windSpeed, windSpeedUnit))} {speedUnit(windSpeedUnit)}</span>
           {windGusts !== undefined && (
-            <span>GUST {formatValue(convertSpeed(windGusts, units))} {speedUnit(units)}</span>
+            <span>GUST {formatValue(convertSpeed(windGusts, windSpeedUnit))} {speedUnit(windSpeedUnit)}</span>
           )}
           {visibility !== undefined && (
             <span>VIS {formatValue(convertDistance(visibility, units))} {distanceUnit(units)}</span>

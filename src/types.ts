@@ -1,6 +1,7 @@
 export type FlightStatus = 'go' | 'caution' | 'no-go'
 
 export type Units = 'metric' | 'imperial'
+export type WindSpeedUnit = 'km/h' | 'm/s' | 'kts'
 
 export interface Settings {
   maxWind: number        // km/h (always stored metric)
@@ -9,6 +10,7 @@ export interface Settings {
   maxPrecip: number      // percentage 0-100
   cautionZone: number    // 0.7 | 0.8 | 0.9
   units: Units
+  windSpeedUnit: WindSpeedUnit
   uiScale: number       // 0.8 - 2.0 (80% - 200%)
 }
 
@@ -19,6 +21,7 @@ export const DEFAULT_SETTINGS: Settings = {
   maxPrecip: 20,
   cautionZone: 0.8,
   units: 'metric',
+  windSpeedUnit: 'km/h',
   uiScale: 1,
 }
 

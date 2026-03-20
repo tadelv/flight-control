@@ -70,7 +70,7 @@ export function Dashboard() {
 
           {weather.data && (
             <div className="mt-3">
-              <WeatherStrip checks={result.checks} units={settings.units} />
+              <WeatherStrip checks={result.checks} units={settings.units} windSpeedUnit={settings.windSpeedUnit ?? 'km/h'} />
             </div>
           )}
 

@@ -117,6 +117,7 @@ function SpotCardWithWeather({
       windGusts={weather.data?.windGusts}
       visibility={weather.data?.visibility}
       units={settings.units}
+      windSpeedUnit={settings.windSpeedUnit ?? 'km/h'}
       onTap={onTap}
       onLongPress={onLongPress}
     />

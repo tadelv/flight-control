@@ -20,9 +20,10 @@ export function computeStatus(
   inRestrictedAirspace: boolean,
   inCautionAirspace: boolean,
 ): GoNoGoResult {
+  const wsu = settings.windSpeedUnit ?? 'km/h'
   const checks: StatusCheck[] = [
-    checkNormal('Wind', weather.windSpeed, settings.maxWind, 'km/h', settings.cautionZone),
-    checkNormal('Gusts', weather.windGusts, settings.maxGust, 'km/h', settings.cautionZone),
+    checkNormal('Wind', weather.windSpeed, settings.maxWind, wsu, settings.cautionZone),
+    checkNormal('Gusts', weather.windGusts, settings.maxGust, wsu, settings.cautionZone),
     checkVisibility(weather.visibility, settings.minVisibility, 'km', settings.cautionZone),
     checkNormal('Precipitation', weather.precipProbability, settings.maxPrecip, '%', settings.cautionZone),
   ]

@@ -1,4 +1,4 @@
-import type { StatusCheck, FlightStatus, Units } from '../types'
+import type { StatusCheck, FlightStatus, Units, WindSpeedUnit } from '../types'
 import { convertSpeed, convertDistance, speedUnit, distanceUnit, formatValue } from '../utils/units'
 
 const statusColor: Record<FlightStatus, string> = {
@@ -10,9 +10,10 @@ const statusColor: Record<FlightStatus, string> = {
 interface WeatherStripProps {
   checks: StatusCheck[]
   units: Units
+  windSpeedUnit: WindSpeedUnit
 }
 
-export function WeatherStrip({ checks, units }: WeatherStripProps) {
+export function WeatherStrip({ checks, units, windSpeedUnit }: WeatherStripProps) {
   return (
     <div className="grid grid-cols-2 xs:grid-cols-4 gap-1.5 px-3 mb-3">
       {checks.map((check, i) => {
@@ -21,12 +22,12 @@ export function WeatherStrip({ checks, units }: WeatherStripProps) {
           ? convertDistance(check.value, units)
           : check.name === 'Precipitation'
             ? check.value
-            : convertSpeed(check.value, units)
+            : convertSpeed(check.value, windSpeedUnit)
         const displayUnit = isDistance
           ? distanceUnit(units)
           : check.name === 'Precipitation'
             ? '%'
-            : speedUnit(units)
+            : speedUnit(windSpeedUnit)
 
         const color = statusColor[check.status]
 

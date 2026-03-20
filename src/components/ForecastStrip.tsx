@@ -32,6 +32,7 @@ interface ForecastStripProps {
 }
 
 export function ForecastStrip({ daily, settings }: ForecastStripProps) {
+  const wsu = settings.windSpeedUnit ?? 'km/h'
   if (daily.length === 0) return null
 
   return (
@@ -62,11 +63,11 @@ export function ForecastStrip({ daily, settings }: ForecastStripProps) {
               </div>
               <div className="flex gap-3 text-[10px] text-hud-muted tracking-wider">
                 <span>
-                  {formatValue(convertSpeed(day.maxWindSpeed, settings.units))}
-                  {' '}{speedUnit(settings.units)}
+                  {formatValue(convertSpeed(day.maxWindSpeed, wsu))}
+                  {' '}{speedUnit(wsu)}
                 </span>
                 <span>
-                  G{formatValue(convertSpeed(day.maxWindGusts, settings.units))}
+                  G{formatValue(convertSpeed(day.maxWindGusts, wsu))}
                 </span>
                 <span>
                   {formatValue(convertDistance(day.minVisibility, settings.units))}
